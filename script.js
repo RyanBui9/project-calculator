@@ -76,3 +76,38 @@ function triggerOperate() {
     b = "";
     hasPressedOperator = false;
 }
+
+inputBox.addEventListener("keydown", (event) => {
+    if (event.key === "=" || event.key === "Enter") {
+        evaluateExpression();
+    }
+});
+
+function evaluateExpression() {
+    let input = inputBox.value;
+    let i = 0;
+    if (a.length !== 0) {
+        a = "";
+    }
+    while (!isOperator(input[i])) {
+        a = a + input[i];
+        i++;
+    }
+
+    operator = input[i];
+    i++;
+
+    while (i < input.length) {
+        b = b + input[i];
+        i++;
+    }
+
+    triggerOperate();
+}
+
+function isOperator(char) {
+    if (char === '+' || char === '-' || char === '*' || char === '/') {
+        return true;
+    }
+    return false;
+}
